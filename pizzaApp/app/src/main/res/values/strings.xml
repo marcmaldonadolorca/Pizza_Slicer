@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">PizzaSlicer</string>
+    <string name="cut_by_ingredient">Cortar por ingrediente</string>
+    <string name="cut_by_number">Cortar por número de trozos</string>
+    <string name="number4">4</string>
+    <string name="number6">6</string>
+    <string name="number8">8</string>
+    <string name="finish">Pizza Slicer ha finalizado!</string>
+    <string name="home">Volver al menú principal</string>
+    <string name="waiting">Esperando...</string>
+    <string name="choose_ingredient">Elige el ingrediente que quieres en el trozo de pizza:</string>
+    <string name="choose_number">Elige el número de trozos:</string>
+    <string name="close_server">Cerrar Servidor</string>
+</resources>
