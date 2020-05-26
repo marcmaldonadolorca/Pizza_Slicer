@@ -17,7 +17,7 @@ Robot automatizado cuyo objetivo es cortar pizzas en función del número de tro
         * [src](#src)
            * [Cliente](#Cliente)
    * [Simulación](#Simulación)
-      * [Piezas 3D](#Piezas 3D)
+      * [Piezas_3D](#Piezas_3D)
       * [Pizza_Slicer](#Pizza_Slicer)
    * [Licencia](#licencia)
    * [Autores](#autores)
@@ -94,19 +94,19 @@ En este archivo encontramos todo lo relacionado con la parte mecánica del robot
 
 Carpeta contenedora de la aplicación Android la cual será la encargada de conectarse con nuestro robot y enviarle las órdenes de corte para las pizzas. Se conecta al archivo ServidorTCP.m situado en la carpeta simulación.
 
-##app
+## app
 ### src
-####Cliente
+#### Cliente
 
 Esta carpeta contiene el archivo Cliente.java el cual será el encargado de establecer la conexión con el archivo ServidorTCP.m situado en la carpeta matlba con el fin de enviar la información que el usuario introduzca en la aplicación
 
 # Simulación
 
-## Piezas 3D
+## Piezas_3D
 
 En esta carpeta se encuentran las diferentes piezas de nuestro robot. El archivo Platform.stl contiene el modelo del plato que utiliza nuestro robot. El archivo Base.stl contiene el modelo de la base del robot. El archivo Pizza_slicer.stl contiene el modelo 3D del robot completo y montado.
 
-##Pizza_Slicer
+## Pizza_Slicer
 
 En esta carpeta encontramos todos los archivos relacionados con el modelo 3D y los scripts necesarios para realizar la simulación del robot en el entorno de Unity.
 
