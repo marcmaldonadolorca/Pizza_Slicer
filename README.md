@@ -3,10 +3,10 @@ Robot automatizado cuyo objetivo es cortar pizzas en función del número de tro
 
 
 # Tabla de contenido
-   * [Descripción](#descripción)
-   * [Requisitos](#requisitos)
-   * [Documentación](#documentación)
-   * [Instrucciones de uso](#instrucciones-de-uso)
+   * [Descripción](#Descripción)
+   * [Requisitos](#Requisitos)
+   * [Documentación](#Documentación)
+   * [Instrucciones de uso](#Instrucciones-de-uso)
    * [Matlab](#Matlab)
       * [ServidorTCP](#ServidorTCP)
       * [pruebas](#pruebas)
@@ -14,19 +14,18 @@ Robot automatizado cuyo objetivo es cortar pizzas en función del número de tro
    * [Mecánica](#Mecánica)
    * [pizzaApp](#pizzaApp)
       * [app](#app)
-        * [src](#src)
-           * [Cliente](#Cliente)
+        * [src/Cliente](#src/Cliente)
    * [Simulación](#Simulación)
       * [Piezas_3D](#Piezas_3D)
       * [Pizza_Slicer](#Pizza_Slicer)
-   * [Licencia](#licencia)
-   * [Autores](#autores)
+   * [Licencia](#Licencia)
+   * [Autores](#Autores)
 
-# descripción
+# Descripción
 
 Nuestro proyecto, conocido como Pizza Slicer, se centra en un robot automático el cual tiene como finalidad cortar una pizza de dos maneras diferentes. Con la primera forma, nuestro robot recibirá un número de cortes seleccionado por el usuario mediante una aplicación y realizará los cortes necesarios para la obtención de este número de porciones. Con la segunda forma, el usuario podrá indicar un ingrediente el cual quiere en su porción de pizza y nuestro robot, con la ayuda de una cámara situada en su parte superior, detectara el ingrediente seleccionado por el usuario y realizará el corte para obtener una porción con dicho ingrediente.
 
-# requisitos
+# Requisitos
 
 Programas:
 
@@ -45,12 +44,12 @@ Add-on Matlab:
 
 - Simulink
 
-# documentación
+# Documentación
 
 Este README muestra como simular el proyecto de Pizza Slicer mediante Unity y enviando las órdenes desde una aplicación Android. En el caso de querer construir el robot físicamente, hay que descomentar el código referente a la conexión entre raspberry y arduino junto con el control de la cámara en los archivos “ServidorTCP.m” situado en la ruta pizzaApp/app/src/Cliente e introducir el código de arduino situado en la carpeta Módulo Mecánica en el archivo Mecanica.ino.
 
 
-# instrucciones-de-uso
+# Instrucciones-de-uso
 
 1. Clonar este repositorio.
 
@@ -95,8 +94,7 @@ En este archivo encontramos todo lo relacionado con la parte mecánica del robot
 Carpeta contenedora de la aplicación Android la cual será la encargada de conectarse con nuestro robot y enviarle las órdenes de corte para las pizzas. Se conecta al archivo ServidorTCP.m situado en la carpeta simulación.
 
 ## app
-### src
-#### Cliente
+### src/Cliente
 
 Esta carpeta contiene el archivo Cliente.java el cual será el encargado de establecer la conexión con el archivo ServidorTCP.m situado en la carpeta matlba con el fin de enviar la información que el usuario introduzca en la aplicación
 
