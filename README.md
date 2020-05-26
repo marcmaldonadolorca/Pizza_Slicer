@@ -14,15 +14,13 @@ Robot automatizado cuyo objetivo es cortar pizzas en función del número de tro
    * [Mecánica](#Mecánica)
    * [pizzaApp](#pizzaApp)
       * [app](#app)
-         * [src](#src)
-            * [Cliente](#Cliente)
+        * [src](#src)
+           * [Cliente](#Cliente)
    * [Simulación](#Simulación)
       * [Piezas 3D](#Piezas 3D)
       * [Pizza_Slicer](#Pizza_Slicer)
-      
-    * [Licencia](#licencia)
-    
-    * [Autores](#autores)
+   * [Licencia](#licencia)
+   * [Autores](#autores)
 
 # descripción
 
