@@ -1,4 +1,3 @@
-tic
 s = tcpip('0.0.0.0', 5000, 'Network', 'server');
 s.ReadAsyncMode = 'continuous';
 %import serial
@@ -7,57 +6,78 @@ global data_pepperoni;
 data_pepperoni = load('nets/pepperoni.mat');
 global data_pina;
 data_pina = load('nets/pina.mat');
-%global data_onion = load('nets/onion.mat');
-%global data_aceitunas = load('nets/aceitunas.mat');
-toc
+global data_onion;
+data_onion = load('nets/onion.mat');
+global data_aceitunas;
+data_aceitunas = load('nets/aceitunas.mat');
+
 while true
     fopen(s);
     mensaje = fread(s);
     a = mensaje(3)-48;
     b = mensaje(5)-48;
+    c = mensaje(7)-48;
+    ip = '';
+    for i = 9:length(mensaje)
+        ip = strcat(ip, char(mensaje(i)));
+    end
+    
+    global A;
+    
+    if c==1
+        A=imread('prueba1.jpg');
+    end
+    if c==2
+        A=imread('prueba2.jpg');
+    end
+    if c==3
+        A=imread('prueba3.jpg');
+    end
+    if c==4
+        A=imread('prueba4.jpg');
+    end
+    
+    ip = mensaje(9);
     %arduino.write(a);
     if a == 0
         fclose(s);
         break
     end
     if a == 1
-        tic
+        
         angulos = trazarcortes(b);
-        toc
+        colorea(A, angulos(1), angulos(2));
         if angulos(1) ~= 0 && angulos(2)~= 0
-            %tcpipClient = tcpip('127.0.0.1',55002,'NetworkRole','Client');
-            %set(tcpipClient,'Timeout',30);
-            %fopen(tcpipClient);
+            tcpipClient = tcpip('127.0.0.1',55002,'NetworkRole','Client');
+            set(tcpipClient,'Timeout',30);
+            fopen(tcpipClient);
             x = "1 " + angulos(1) + " " + angulos(2);
             %arduino.write(angulos(1));
             %arduino.write(angulos(2));
-            disp(x);
-            %fwrite(tcpipClient,x);
-            %fclose(tcpipClient);
+            fwrite(tcpipClient,x);
+            fclose(tcpipClient);
         end
     end
     if a == 2
-        
-        %tcpipClient = tcpip('127.0.0.1',55002,'NetworkRole','Client');
-        %set(tcpipClient,'Timeout',30);
-        %fopen(tcpipClient);
+        cd ..
+        imwrite(A,'Simulación/Pizza_Slicer/Assets/prueba.jpg');
+        cd Matlab
+        tcpipClient = tcpip('127.0.0.1',55002,'NetworkRole','Client');
+        set(tcpipClient,'Timeout',30);
+        fopen(tcpipClient);
         x="2 " + b;
         %arduino.write(b);
-        disp(x);
-        %fwrite(tcpipClient,x);
-        %fclose(tcpipClient);
+        fwrite(tcpipClient,x);
+        fclose(tcpipClient);
+
     end
     
     fclose(s);
 end
 
 function retorno = trazarcortes(comanda)
-    %{
-    rpi = raspi();
-    cam = cameraboard(rpi,'Resolution','640x480');
-    A = snapshot(cam);
-    %}
-    A = imread('prueba.jpg');
+
+    global A;
     if comanda == 1
         global data_pepperoni;
         data = data_pepperoni;
@@ -154,8 +174,7 @@ function retorno = trazarcortes(comanda)
         if(angulo1 > angulo2+30)
             angulo1 = angulo2 +30;
         end
-        disp(angulo1);
-        disp(angulo2);
+
     end
 
     if(Bsector1 == 0 && Bsector2 == 1 && Bsector3 == 0 && Bsector4 == 0)
@@ -187,8 +206,7 @@ function retorno = trazarcortes(comanda)
         if(angulo2 > angulo1+30)
             angulo1 = angulo2 +30;
         end
-        disp(angulo1);
-        disp(angulo2);
+
     end
 
     if(Bsector1 == 0 && Bsector2 == 0 && Bsector3 == 1 && Bsector4 == 0)
@@ -222,8 +240,7 @@ function retorno = trazarcortes(comanda)
         if(angulo1 < angulo2-30)
             angulo1 = angulo2-30;
         end
-        disp(angulo1);
-        disp(angulo2);
+
     end
 
     if(Bsector1 == 0 && Bsector2 == 0 && Bsector3 == 0 && Bsector4 == 1)
@@ -257,8 +274,7 @@ function retorno = trazarcortes(comanda)
         if(angulo1 < angulo2-30)
             angulo1 = angulo2-30;
         end
-        disp(angulo1);
-        disp(angulo2);
+
     end
 
     if(Bsector1 == 1 && Bsector2 == 1 && Bsector3 == 0 && Bsector4 == 0)
@@ -291,8 +307,7 @@ function retorno = trazarcortes(comanda)
         if(angulo1 > angulo2+30)
             angulo1 = angulo2+30;
         end
-        disp(angulo1);
-        disp(angulo2);
+
     end
 
     if(Bsector1 == 1 && Bsector2 == 0 && Bsector3 == 1 && Bsector4 == 0)
@@ -331,8 +346,7 @@ function retorno = trazarcortes(comanda)
         if angulo2 > 180
             angulo2 = -(360-angulo2);
         end
-        disp(angulo1);
-        disp(angulo2);
+
     end
 
     if(Bsector1 == 0 && Bsector2 == 1 && Bsector3 == 0 && Bsector4 == 1)
@@ -366,8 +380,7 @@ function retorno = trazarcortes(comanda)
         if(angulo2 < angulo1-30)
             angulo2 = angulo1-30;
         end
-        disp(angulo1);
-        disp(angulo2);
+
     end
 
     if(Bsector1 == 0 && Bsector2 == 0 && Bsector3 == 1 && Bsector4 == 1)
@@ -402,8 +415,7 @@ function retorno = trazarcortes(comanda)
         if (angulo2 < angulo1-30)
             angulo2 = angulo1-30;
         end
-        disp(angulo1);
-        disp(angulo2);
+
     end
 
     if(Bsector1 == 1 && Bsector2 == 1 && Bsector3 == 1 && Bsector4 == 0)
@@ -435,8 +447,7 @@ function retorno = trazarcortes(comanda)
         end
 
         angulo2 = angulo1 +30;
-        disp(angulo1);
-        disp(angulo2);
+
     end
 
     if(Bsector1 == 1 && Bsector2 == 1 && Bsector3 == 0 && Bsector4 == 1)
@@ -467,8 +478,7 @@ function retorno = trazarcortes(comanda)
             end
         end
         angulo2 = angulo1-30;
-        disp(angulo1);
-        disp(angulo2);
+
     end
 
     if(Bsector1 == 1 && Bsector2 == 0 && Bsector3 == 1 && Bsector4 == 1)
@@ -500,8 +510,7 @@ function retorno = trazarcortes(comanda)
         end
         angulo2 = -angulo2;
         angulo1 = angulo2-30;
-        disp(angulo1);
-        disp(angulo2);
+
     end
 
     if(Bsector1 == 0 && Bsector2 == 1 && Bsector3 == 1 && Bsector4 == 1)
@@ -533,8 +542,7 @@ function retorno = trazarcortes(comanda)
         end
         angulo2 = -angulo2;
         angulo1 = angulo2 +30;
-        disp(angulo1);
-        disp(angulo2);
+
     end
 
     if(Bsector1 == 1 && Bsector2 == 1 && Bsector3 == 1 && Bsector4 == 1)
@@ -558,10 +566,81 @@ function retorno = trazarcortes(comanda)
            end
        end
        angulo2 = Y;
-       disp(angulo1);
-       disp(angulo2);
 
     end
     retorno = [angulo1, angulo2];
     
+end
+
+function img = colorea(imagen,angulo1, angulo2)
+cd ..
+
+    [y,x,z] = size(imagen);
+    img = imagen;
+
+    if(angulo1 == 90 || angulo1 == -90)
+          for i=1:y
+
+                   img(i,ceil(x/2),1) = 255;
+                   img(i,ceil(x/2),2)= 255;
+                   img(i,ceil(x/2),3)= 255;
+
+          end
+
+    else
+
+        for i=1:ceil(x)
+
+           j = (-tand(angulo1) * (i - x/2))+ y/2;
+
+           if(ceil(j) < y && ceil(j)>1)
+
+               img(ceil(j),ceil(i),1) = 255;
+               img(ceil(j),ceil(i),2)= 255;
+               img(ceil(j),ceil(i),3)= 255;
+               img(ceil(j+1),ceil(i),1) = 255;
+               img(ceil(j+1),ceil(i),2)= 255;
+               img(ceil(j),ceil(i),3)= 255;
+               img(ceil(j),ceil(i+1),1) = 255;
+               img(ceil(j),ceil(i+1),2)= 255;
+               img(ceil(j),ceil(i+1),3)= 255;
+
+           end
+        end
+    end
+
+    if(angulo2 == 90 || angulo2 == -90)
+          for i=1:y
+
+                   img(i,ceil(x/2),1) = 255;
+                   img(i,ceil(x/2),2)= 255;
+                   img(i,ceil(x/2),3)= 255;
+
+          end
+
+    else
+
+        for i=1:ceil(x)
+
+           j = (-tand(angulo2) * (i - x/2))+ y/2;
+
+           if(ceil(j) < y && ceil(j)>1)
+
+               img(ceil(j),ceil(i),1) = 255;
+               img(ceil(j),ceil(i),2)= 255;
+               img(ceil(j),ceil(i),3)= 255;
+               img(ceil(j+1),ceil(i),1) = 255;
+               img(ceil(j+1),ceil(i),2)= 255;
+               img(ceil(j),ceil(i),3)= 255;
+               img(ceil(j),ceil(i+1),1) = 255;
+               img(ceil(j),ceil(i+1),2)= 255;
+               img(ceil(j),ceil(i+1),3)= 255;
+
+           end
+        end
+    end
+
+    imwrite(img,'Simulacion/Pizza_Slicer/Assets/prueba.jpg')
+    cd Matlab
+
 end
