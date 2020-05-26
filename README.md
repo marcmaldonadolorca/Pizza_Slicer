@@ -14,7 +14,7 @@ Robot automatizado cuyo objetivo es cortar pizzas en función del número de tro
    * [Mecánica](#Mecánica)
    * [pizzaApp](#pizzaApp)
       * [app](#app)
-        * [src/Cliente](#src/Cliente)
+        * [src\Cliente](#src\Cliente)
    * [Simulación](#Simulación)
       * [Piezas_3D](#Piezas_3D)
       * [Pizza_Slicer](#Pizza_Slicer)
@@ -71,15 +71,15 @@ Nota: Al no tener una cámara de  raspberry disponible para las pizzas, en su de
 # Matlab
 
 
-
-
 ## ServidorTCP
 
 En este archivo se reciben los datos recibidos por la aplicación del cliente y realiza las acciones necesarias para realizar las porciones que el cliente solicita. Debido a la falta de componentes físicos y la carencia de algunos componentes en el simulador, el código relacionado con la conexión entre la raspberry y el arduino aparece comentado. El resto del código corresponde con la comunicación establecida con unity donde se puede observar el funcionamiento del robot.
 Ademàs se encarga de trazar los cortes, intenta cortar un trozo de pizza de 30 grados, en el caso de no poder debido a que no haya suficiente porción de pizza hace un corte con el ángulo que sea posible. Si hay ese ingrediente en toda la pizza, elige un trozo aleatoriamente, en el caso de no detectar ningún ingrediente, la función de este script se llama directamente del servidor de matlab.
+
 ## pruebas
 
 Este script se ha utilizado para dividir el dataset en las carpetas correspondientes y tener las imágenes con el nombre correcto para facilitar la tarea de entrenamiento.
+
 ## Deteccion
 
 Script para el entrenamiento de las redes neuronales de detección de ingredientes. Estas se han tratado de entrenar con pizzas reales utilizando técnicas de weakly supervised semantic segmentation, concretamente de image-level annotations, esta tarea ha consumido mucho tiempo y no ha dado frutos por lo cual hemos decidido actuar según el plan de contingencia, y hemos usado pizzas sintéticas para entrenar nuestra red neuronal, obteniendo unos resultados de más de 90% de accuracy para cada ingrediente (piña, pepperoni, cebolla y aceitunas). Este script genera archivos .mat que contiene la red.
@@ -94,7 +94,7 @@ En este archivo encontramos todo lo relacionado con la parte mecánica del robot
 Carpeta contenedora de la aplicación Android la cual será la encargada de conectarse con nuestro robot y enviarle las órdenes de corte para las pizzas. Se conecta al archivo ServidorTCP.m situado en la carpeta simulación.
 
 ## app
-### src/Cliente
+### src\Cliente
 
 Esta carpeta contiene el archivo Cliente.java el cual será el encargado de establecer la conexión con el archivo ServidorTCP.m situado en la carpeta matlba con el fin de enviar la información que el usuario introduzca en la aplicación
 
