@@ -11,4 +11,5 @@
     <string name="choose_ingredient">Elige el ingrediente que quieres en el trozo de pizza:</string>
     <string name="choose_number">Elige el número de trozos:</string>
     <string name="close_server">Cerrar Servidor</string>
+    <string name="choose_pizza">Elige el tipo de pizza:</string>
 </resources>

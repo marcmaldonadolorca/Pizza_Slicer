@@ -3,13 +3,13 @@ package pizza.pizzaslicer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 public class IngredientActivity extends AppCompatActivity {
 
     private ImageView img1, img2, img3, img4;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +19,7 @@ public class IngredientActivity extends AppCompatActivity {
         img1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.cliente.enviarDatos(1, 1);
+                MainActivity.cliente.enviarDatos(1, 1, MainActivity.tipoPizza);
                 startActivity(new Intent(IngredientActivity.this, WaitingActivity.class));
             }
         });
@@ -28,7 +28,7 @@ public class IngredientActivity extends AppCompatActivity {
         img2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.cliente.enviarDatos(1, 2);
+                MainActivity.cliente.enviarDatos(1, 2,MainActivity.tipoPizza);
                 startActivity(new Intent(IngredientActivity.this, WaitingActivity.class));
             }
         });
@@ -37,7 +37,7 @@ public class IngredientActivity extends AppCompatActivity {
         img3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.cliente.enviarDatos(1, 3);
+                MainActivity.cliente.enviarDatos(1, 3,MainActivity.tipoPizza);
                 startActivity(new Intent(IngredientActivity.this, WaitingActivity.class));
             }
         });
@@ -46,7 +46,7 @@ public class IngredientActivity extends AppCompatActivity {
         img4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.cliente.enviarDatos(1, 4);
+                MainActivity.cliente.enviarDatos(1, 4,MainActivity.tipoPizza);
                 startActivity(new Intent(IngredientActivity.this, WaitingActivity.class));
             }
         });

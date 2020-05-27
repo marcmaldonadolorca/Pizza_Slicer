@@ -4,16 +4,16 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btn;
-    private Button btn2;
-    private Button btn7;
     static public Cliente cliente = new Cliente();
     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+    private ImageView img1, img2, img3, img4;
+    static public int tipoPizza;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,30 +21,42 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         StrictMode.setThreadPolicy(policy);
 
-        btn = (Button)findViewById(R.id.button);
-        btn2 = (Button)findViewById(R.id.button2);
-        btn7 = (Button)findViewById(R.id.button7);
-
-        btn.setOnClickListener(new View.OnClickListener() {
+        img1 = (ImageView) findViewById(R.id.imageView5);
+        img1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, IngredientActivity.class));
+                tipoPizza=1;
+                startActivity(new Intent(MainActivity.this, CutTypeActivity.class));
             }
         });
 
-        btn2.setOnClickListener(new View.OnClickListener() {
+        img2 = (ImageView) findViewById(R.id.imageView6);
+        img2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, NumberActivity.class));
+                tipoPizza=2;
+                startActivity(new Intent(MainActivity.this, CutTypeActivity.class));
             }
         });
 
-        btn7.setOnClickListener(new View.OnClickListener() {
+        img3 = (ImageView) findViewById(R.id.imageView7);
+        img3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cliente.enviarDatos(0,0);
+                tipoPizza=3;
+                startActivity(new Intent(MainActivity.this, CutTypeActivity.class));
             }
         });
+
+        img4 = (ImageView) findViewById(R.id.imageView8);
+        img4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tipoPizza=4;
+                startActivity(new Intent(MainActivity.this, CutTypeActivity.class));
+            }
+        });
+
     }
 
 
