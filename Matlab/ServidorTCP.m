@@ -1,5 +1,6 @@
 s = tcpip('0.0.0.0', 5000, 'Network', 'server');
 s.ReadAsyncMode = 'continuous';
+disp("Inicio");
 %import serial
 %arduino = serial.Serial('/dev/ttyACM0', 9600);
 global data_pepperoni;
@@ -12,15 +13,14 @@ global data_aceitunas;
 data_aceitunas = load('nets/aceitunas.mat');
 
 while true
+    disp("entra while");
     fopen(s);
+    disp("abre socket");
     mensaje = fread(s);
+    disp("ha leido mensaje");
     a = mensaje(3)-48;
     b = mensaje(5)-48;
     c = mensaje(7)-48;
-    ip = '';
-    for i = 9:length(mensaje)
-        ip = strcat(ip, char(mensaje(i)));
-    end
     
     global A;
     
@@ -37,21 +37,25 @@ while true
         A=imread('prueba4.jpg');
     end
     
-    ip = mensaje(9);
     %arduino.write(a);
     if a == 0
         fclose(s);
         break
     end
     if a == 1
-        
+        disp("entra al if 1");
         angulos = trazarcortes(b);
+        disp(angulos);
+        disp("acaba funcion trazar cortes");
         colorea(A, angulos(1), angulos(2));
+        disp("acaba función colorea");
         if angulos(1) ~= 0 && angulos(2)~= 0
+            disp("entra en el if sub 1");
             tcpipClient = tcpip('127.0.0.1',55002,'NetworkRole','Client');
             set(tcpipClient,'Timeout',30);
             fopen(tcpipClient);
-            x = "1 " + angulos(1) + " " + angulos(2);
+            x = "1 " + ceil(angulos(1)) + " " + ceil(angulos(2));
+            disp(x);
             %arduino.write(angulos(1));
             %arduino.write(angulos(2));
             fwrite(tcpipClient,x);
@@ -59,6 +63,7 @@ while true
         end
     end
     if a == 2
+        disp("entra en el if de cortes");
         cd ..
         imwrite(A,'Simulación/Pizza_Slicer/Assets/prueba.jpg');
         cd Matlab
@@ -66,8 +71,10 @@ while true
         set(tcpipClient,'Timeout',30);
         fopen(tcpipClient);
         x="2 " + b;
+        disp(x);
         %arduino.write(b);
         fwrite(tcpipClient,x);
+        disp("acaba el fwrite");
         fclose(tcpipClient);
 
     end
@@ -640,7 +647,7 @@ cd ..
         end
     end
 
-    imwrite(img,'Simulacion/Pizza_Slicer/Assets/prueba.jpg')
+    imwrite(img,'Simulación/Pizza_Slicer/Assets/prueba.jpg')
     cd Matlab
 
 end
